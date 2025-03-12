@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Search engine</title>
+    <style>
+      .live-search-box {
+        width: 300px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="logo">Web Search Engine</h1>
+        <p>Input keyword into the search bar to get the best match websites in the database</p>
+      </div>
+    </header>
+    </div>    
+      <input type="text" class="live-search-box" placeholder="search here" />
+      <button type="button" onclick="Search()">Search</button>
+    </div>
+
+    <table id="searchResults">
+    </table>
+    
+    <script>
+      function Search(){
+        var keyword = document.querySelector('.live-search-box').value;
+        var request = new XMLHttpRequest();
+        request.open("GET", "result.csv", true);
+        request.onreadystatechange = function() {
+          if (request.readyState === 4 && request.status === 200) {
+            var rows = request.responseText.split("\n");
+            var table = document.getElementById("searchResults");
+            table.innerHTML = "";
+            var count = 0;
+            for (var i = 0; i < rows.length && count < 10; i++) {
+              var row = document.createElement("tr");
+              var cell = document.createElement("td");
+              cell.textContent = rows[i];
+              row.appendChild(cell);
+              table.appendChild(row);
+              table.appendChild(document.createElement("br"));
+              count++;      
+            }
+          }
+        };
+        request.send();
+      }
+    </script>
+
+  </body>
+</html>

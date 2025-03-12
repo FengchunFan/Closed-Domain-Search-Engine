@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <table id="searchResults">
+    </table>
+
+    <script>
+        var request = new XMLHttpRequest();
+        request.open("GET", "static/result.csv", true);
+        request.onreadystatechange = function() {
+            if (request.readyState === 4 && request.status === 200) {
+                var rows = request.responseText.split("\n");
+                var table = document.getElementById("searchResults");
+                table.innerHTML = "";
+                count = 0;
+                for (var i = 0; i < rows.length && count < 10; i++) {
+                    var row = document.createElement("tr");
+                    var cell = document.createElement("td");
+                    cell.textContent = rows[i];
+                    row.appendChild(cell);
+                    table.appendChild(row);
+                    if (i < rows.length - 1) {
+                        var newline = document.createElement("tr");
+                        var newlineCell = document.createElement("td");
+                        newlineCell.innerHTML = "<br/>";
+                        newline.appendChild(newlineCell);
+                        table.appendChild(newline);
+                    }
+                    count++;
+                }
+            }
+        };
+        request.send();
+    </script>
+
+    <form action="/" method="POST">
+        <p><input type="submit" value="Search Again" /></p>
+    </form>
+</body>
+</html>
