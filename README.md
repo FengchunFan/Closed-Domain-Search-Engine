@@ -2,9 +2,9 @@
 
 1) Use python scrapy to crawl selected Education websites (sites ends with .edu)
 
-Scrapy crawling command: "scrapy crawl <crawler_name>"
+    Scrapy crawling command: "scrapy crawl <crawler_name>"
 
-Run webcrawl.sh for terminal or run.bat for windows.
+    Run webcrawl.sh for terminal or run.bat for windows.
 
 ##
 Referenced sources:
